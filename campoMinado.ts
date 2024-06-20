@@ -6,14 +6,6 @@ type Square = {
     nearMines : number;
 }
 
-const square : Square = {
-    row : 0,
-    column : 0,
-    state : "closed",
-    hasMine : false,
-    nearMines : 0
-}
-
 const criarCampo = (linhas : number, colunas : number) : Square[][] => {
     let campo : Square[][] = [];
     for (let i : number = 0; i < linhas; i++) {
