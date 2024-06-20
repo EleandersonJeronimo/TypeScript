@@ -1,4 +1,4 @@
-type square = {
+type Square = {
     row : number;
     column : number;
     state : string;
@@ -6,12 +6,26 @@ type square = {
     nearMines : number;
 }
 
-const criarCampo = (linhas : number, colunas : number) : string[][] => {
-    let campo : string[][] = [];
+const square : Square = {
+    row : 0,
+    column : 0,
+    state : "closed",
+    hasMine : false,
+    nearMines : 0
+}
+
+const criarCampo = (linhas : number, colunas : number) : Square[][] => {
+    let campo : Square[][] = [];
     for (let i : number = 0; i < linhas; i++) {
-        let linhaArray : string[] = [];
+        let linhaArray : Square[] = [];
         for (let j : number = 0; j < colunas; j++) {
-            let novoSquare: string = `${i},${j}`;
+            let novoSquare: Square = {
+                row : i,
+                column : j,
+                state : "closed",
+                hasMine : false,
+                nearMines : 0
+            };
             linhaArray.push(novoSquare);
         }
         campo.push(linhaArray);
@@ -19,7 +33,7 @@ const criarCampo = (linhas : number, colunas : number) : string[][] => {
     return campo;
 };
 
-const sortearMinas = (campo, qtdMinas : number) : void=> {
+const sortearMinas = (campo : Square[][], qtdMinas : number) : void=> {
     let linhas : number = campo.length;
     let colunas : number = campo[0].length;
     let minasColocadas : number = 0;
@@ -58,7 +72,7 @@ const contarMinasVolta = (campo, linha, coluna) : number=> {
     return qtdMinas;
 };
 
-const contarTotMinas = (campo) : number => {
+const contarTotMinas = (campo : Square[][]) : number => {
     let linha : number = campo.length;
     let coluna : number = campo[0].length;
     let tot : number = 0;
@@ -77,7 +91,7 @@ const imprimirMatriz = (campo) : void => {
     for (let i : number = 0; i < linhas; i++) {
         let linhaString : string = "";
         for (let j : number = 0; j < colunas; j++) {
-            let square : square = campo[i][j];
+            let square : Square = campo[i][j];
             if (square.hasMine) {
                 linhaString += "[*]";
             } else {
