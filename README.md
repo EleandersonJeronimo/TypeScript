@@ -1,0 +1,2 @@
+# TypeScript
+capacitação typescript
